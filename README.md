@@ -37,7 +37,7 @@ I want to generate a commander cube based on a chosen set of deck archetypes.
 |------------|-----------------------------------------------------------------------------|
 | Frontend   | HTML, CSS, and Javascript (React.js)                                        |
 | Backend    | Django                                                                      |
-| Database   | PostgreSQL, CockroachDB, or Render                                          |
+| Database   | Supabase                               |
 | API        | Scryfall integrated API ([https://scryfall.com/docs/api](https://scryfall.com/docs/api)) |
 | Hosting    | Render                                                                      |
 
