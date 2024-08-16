@@ -7,7 +7,7 @@ import sys
 def main():
     """Run administrative tasks."""
     os.environ.setdefault(
-        "DJANGO_SETTINGS_MODULE", "mtg_commadnder_cube_generator.settings"
+        "DJANGO_SETTINGS_MODULE", "mtg_commander_cube_generator.settings"
     )
     try:
         from django.core.management import execute_from_command_line

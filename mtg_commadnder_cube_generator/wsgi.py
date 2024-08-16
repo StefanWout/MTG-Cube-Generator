@@ -1,5 +1,5 @@
 """
-WSGI config for mtg_commadnder_cube_generator project.
+WSGI config for mtg_commander_cube_generator project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -12,7 +12,7 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault(
-    "DJANGO_SETTINGS_MODULE", "mtg_commadnder_cube_generator.settings"
+    "DJANGO_SETTINGS_MODULE", "mtg_commander_cube_generator.settings"
 )
 
 application = get_wsgi_application()

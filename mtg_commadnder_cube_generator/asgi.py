@@ -1,5 +1,5 @@
 """
-ASGI config for mtg_commadnder_cube_generator project.
+ASGI config for mtg_commander_cube_generator project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -12,7 +12,7 @@ import os
 from django.core.asgi import get_asgi_application
 
 os.environ.setdefault(
-    "DJANGO_SETTINGS_MODULE", "mtg_commadnder_cube_generator.settings"
+    "DJANGO_SETTINGS_MODULE", "mtg_commander_cube_generator.settings"
 )
 
 application = get_asgi_application()
