@@ -11,18 +11,46 @@ class Archetype(models.Model):
 
 class Card(models.Model):
     COLOR_CHOICES = [
-        ('W', 'White'),
-        ('U', 'Blue'),
-        ('B', 'Black'),
-        ('R', 'Red'),
-        ('G', 'Green'),
-        ('C', 'Colorless'),
-        ('WU', 'White-Blue'),
-        ('UB', 'Blue-Black'),
-        ('BR', 'Black-Red'),
-        ('RG', 'Red-Green'),
-        ('GW', 'Green-White'),
-        ('WUBRG', 'All Colors'),  # Add other combinations as needed
+    ('W', 'White'),
+    ('U', 'Blue'),
+    ('B', 'Black'),
+    ('R', 'Red'),
+    ('G', 'Green'),
+    ('C', 'Colorless')
+    
+    # Two-Color Combinations
+    ('WU', 'White-Blue'),
+    ('WB', 'White-Black'),
+    ('WR', 'White-Red'),
+    ('WG', 'White-Green'),
+    ('UB', 'Blue-Black'),
+    ('UR', 'Blue-Red'),
+    ('UG', 'Blue-Green'),
+    ('BR', 'Black-Red'),
+    ('BG', 'Black-Green'),
+    ('RG', 'Red-Green'),
+    
+    # Three-Color Combinations
+    ('WUB', 'White-Blue-Black'),
+    ('WUR', 'White-Blue-Red'),
+    ('WUG', 'White-Blue-Green'),
+    ('WBR', 'White-Black-Red'),
+    ('WBG', 'White-Black-Green'),
+    ('WRG', 'White-Red-Green'),
+    ('UBR', 'Blue-Black-Red'),
+    ('UBG', 'Blue-Black-Green'),
+    ('URG', 'Blue-Red-Green'),
+    ('BRG', 'Black-Red-Green'),
+    
+    # Four-Color Combinations
+    ('WUBR', 'White-Blue-Black-Red'),
+    ('WUBG', 'White-Blue-Black-Green'),
+    ('WURG', 'White-Blue-Red-Green'),
+    ('WBRG', 'White-Black-Red-Green'),
+    ('UBRG', 'Blue-Black-Red-Green'),
+    
+    # Five-Color Combination
+    ('WUBRG', 'White-Blue-Black-Red-Green')
     ]
 
     name = models.CharField(max_length=255)
