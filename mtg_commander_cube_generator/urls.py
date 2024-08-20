@@ -16,10 +16,10 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from cube_generator.views import GetCard
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("test/", GetCard.as_view(), name='get_card')
+    path("test/", GetCard.as_view(), name='base')
 ]
