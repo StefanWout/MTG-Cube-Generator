@@ -69,6 +69,13 @@ def populate_cards():
             logging.error(f"Skipping card due to missing 'type_line': {card['name']} (ID: {card['id']})")
             continue  # Skip to the next card
 
+        unwanted_types = {'Card', 'Token', 'Plane', 'Phenom', 'Scheme', 'Vanguard', 'Emblem', }
+
+        # Step 5.2: Check if any face has 'type_line' set to an unwanted value. If so, skip the card entirely.
+        if any(face.get('type_line') in unwanted_types for face in card_faces):
+            logging.info(f"Skipping card due to unwanted type line: {card['name']} (ID: {card['id']})")
+            continue  # Skip to the next card
+
         for face in card_faces:
             defaults = {
                 'name': face['name'],
@@ -86,10 +93,21 @@ def populate_cards():
                 'img_url': face['image_uris']['normal'] if face.get('image_uris') else ''
             }
 
-            Card.objects.update_or_create(
-                scryfall_id=card['id'],  # Use the same scryfall_id for both faces or single-faced cards
-                defaults=defaults
-            )
+             # Log the fields about to be inserted
+            logging.debug(f"Preparing to save card: {card['name']} (ID: {card['id']})")
+            for key, value in defaults.items():
+                logging.debug(f"Field: {key}, Value: {value}")
+
+            # Attempt to save the card, catching any errors
+            try:
+                Card.objects.update_or_create(
+                    scryfall_id=card['id'],  # Use the same scryfall_id for both faces or single-faced cards
+                    defaults=defaults
+                )
+            except django.db.utils.DataError as e:
+                logging.error(f"DataError for card: {card['name']} (ID: {card['id']}) - Field: {key}, Value: {value}")
+                logging.error(f"Exception: {e}")
+                raise  # Re-raise the exception to halt execution
 
     # Step 6: Print a success message after populating the database
     print('Successfully populated the database with Scryfall data')
