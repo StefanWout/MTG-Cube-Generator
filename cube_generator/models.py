@@ -55,7 +55,7 @@ class Card(models.Model):
         # Five-Color Combination
         ('WUBRG', 'White-Blue-Black-Red-Green')
     ]
-
+    scryfall_id = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     mana_cost = models.CharField(max_length=50, blank=True, null=True)
     mana_value = models.DecimalField(max_digits=10, decimal_places=2)

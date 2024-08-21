@@ -27,7 +27,7 @@ SECRET_KEY = "django-insecure-qcxbf#7@eb&-t6l!464agtap!@y=z!(eq@ow@tk7ag@uacmyhg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "cube_generator",
+    "mtg_commander_cube_generator",
 ]
 
 MIDDLEWARE = [

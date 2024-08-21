@@ -1,12 +1,25 @@
+
 import requests
 import os
 import django
-from cube_generator.models import Card
+import logging
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                       'mtg_commander_cube_generator.settings')
 django.setup()
 
+from cube_generator.models import Card
+
+logging.basicConfig(level=logging.DEBUG)
+
+def safe_int(value):
+    """Convert value to an integer, or return None if not valid."""
+    try:
+        if value == '*':
+            return None  # or some special value if you want to treat '*' as a placeholder
+        return int(value)
+    except (ValueError, TypeError):
+        return None
 
 def populate_cards():
     # Step 1: Fetch the bulk data metadata from Scryfall
@@ -29,6 +42,11 @@ def populate_cards():
     response = requests.get(all_cards_url)
     card_data = response.json()
 
+    for card in card_data:
+        # Debugging: Print or log the card data if 'type_line' is missing
+        if 'type_line' not in card:
+            logging.error(f"Card is missing 'type_line': {card}")
+
     # Step 5: Populate the database with the card data
     for card in card_data:
         defaults = {
@@ -38,8 +56,8 @@ def populate_cards():
             'type_line': card['type_line'],
             'oracle_text': card.get('oracle_text'),
             'keywords': ', '.join(card.get('keywords', [])),
-            'power': int(card['power']) if card.get('power') else None,
-            'toughness': int(card['toughness']) if card.get('toughness') else None,
+            'power': safe_int(card['power']) if card.get('power') else None,
+            'toughness': safe_int(card['toughness']) if card.get('toughness') else None,
             'color_identity': ''.join(card.get('color_identity', ['C'])),
             'set_name': card['set_name'],
             'rarity': card['rarity'],
