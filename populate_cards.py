@@ -1,11 +1,9 @@
-
 import requests
 import os
 import django
 import logging
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE',
-                      'mtg_commander_cube_generator.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mtg_commander_cube_generator.settings')
 django.setup()
 
 from cube_generator.models import Card
@@ -20,6 +18,26 @@ def safe_int(value):
         return int(value)
     except (ValueError, TypeError):
         return None
+
+def extract_card_faces(card_data):
+    """Extract card faces, or handle as a single card if no faces."""
+    card_faces_data = []
+    
+    # If 'card_faces' is present, handle the faces
+    if 'card_faces' in card_data:
+        faces = card_data['card_faces']
+        
+        # If the two faces are identical, use only one
+        if len(faces) == 2 and faces[0] == faces[1]:
+            card_faces_data.append(faces[0])
+        else:
+            # Process each face separately if they differ
+            card_faces_data.extend(faces)
+    else:
+        # If no 'card_faces', treat as a single card
+        card_faces_data.append(card_data)
+    
+    return card_faces_data
 
 def populate_cards():
     # Step 1: Fetch the bulk data metadata from Scryfall
@@ -42,37 +60,39 @@ def populate_cards():
     response = requests.get(all_cards_url)
     card_data = response.json()
 
-    for card in card_data:
-        # Debugging: Print or log the card data if 'type_line' is missing
-        if 'type_line' not in card:
-            logging.error(f"Card is missing 'type_line': {card}")
-
     # Step 5: Populate the database with the card data
     for card in card_data:
-        defaults = {
-            'name': card['name'],
-            'mana_cost': card.get('mana_cost'),
-            'mana_value': card.get('cmc', 0),
-            'type_line': card['type_line'],
-            'oracle_text': card.get('oracle_text'),
-            'keywords': ', '.join(card.get('keywords', [])),
-            'power': safe_int(card['power']) if card.get('power') else None,
-            'toughness': safe_int(card['toughness']) if card.get('toughness') else None,
-            'color_identity': ''.join(card.get('color_identity', ['C'])),
-            'set_name': card['set_name'],
-            'rarity': card['rarity'],
-            'edhrec_rank': card.get('edhrec_rank', 0),
-            'img_url': card['image_uris']['normal'] if card.get('image_uris') else ''
-        }
+        card_faces = extract_card_faces(card)
 
-        Card.objects.update_or_create(
-            scryfall_id=card['id'],
-            defaults=defaults
-        )
+        for face in card_faces:
+            # Debugging: Print or log the face data if 'type_line' is missing
+            if 'type_line' not in face:
+                logging.error(f"Card face is missing 'type_line': {face}")
+                continue  # Skip to the next face or card
+
+            defaults = {
+                'name': face['name'],
+                'mana_cost': face.get('mana_cost'),
+                'mana_value': face.get('cmc', 0),
+                'type_line': face['type_line'],
+                'oracle_text': face.get('oracle_text'),
+                'keywords': ', '.join(face.get('keywords', [])),
+                'power': safe_int(face['power']) if face.get('power') else None,
+                'toughness': safe_int(face['toughness']) if face.get('toughness') else None,
+                'color_identity': ''.join(card.get('color_identity', ['C'])),
+                'set_name': card['set_name'],
+                'rarity': card['rarity'],
+                'edhrec_rank': card.get('edhrec_rank', 0),
+                'img_url': face['image_uris']['normal'] if face.get('image_uris') else ''
+            }
+
+            Card.objects.update_or_create(
+                scryfall_id=card['id'],  # Use the same scryfall_id for both faces or single-faced cards
+                defaults=defaults
+            )
 
     # Step 6: Print a success message after populating the database
     print('Successfully populated the database with Scryfall data')
-
 
 if __name__ == '__main__':
     populate_cards()
