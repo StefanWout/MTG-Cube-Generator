@@ -64,12 +64,12 @@ def populate_cards():
     for card in card_data:
         card_faces = extract_card_faces(card)
 
-        for face in card_faces:
-            # Debugging: Print or log the face data if 'type_line' is missing
-            if 'type_line' not in face:
-                logging.error(f"Card face is missing 'type_line': {face}")
-                continue  # Skip to the next face or card
+        # Step 5.1: Check if any face is missing the 'type_line'. If so, skip the card entirely.
+        if any('type_line' not in face for face in card_faces):
+            logging.error(f"Skipping card due to missing 'type_line': {card['name']} (ID: {card['id']})")
+            continue  # Skip to the next card
 
+        for face in card_faces:
             defaults = {
                 'name': face['name'],
                 'mana_cost': face.get('mana_cost'),
