@@ -86,3 +86,26 @@ This is the default model provided by Django for user authentication and profile
 | `cards`          | ManyToManyField(Card)                   |
 | `archetypes`     | ManyToManyField(Archetype)              |
 | `user`           | ForeignKey                              |
+
+Database objectives:
+
+- Develop Scryfall API call that cleans and filters irrelevant data ✔
+- Render data in my model ✔ 
+- Run test queries ✔
+- Determine if a color identity table is necessary for full functionality
+- Test Query Set for simple archetypes
+
+Archetype Queries with EDHREC unofficial API:
+
+- Pull archetypes from edhrec.com using python wrapper (https://pypi.org/project/pyedhrec/)
+- Pull oracle text for the 200 most popular cards in each archetype
+- Write python script to query data set for all relevant cards based on string templates found in oracle text
+- Provide archetype weighting to rules text that fits multiple archetypes
+
+OR
+
+Crowdsourced Archetype definitions:
+
+- Gather archetypes from EDHREC and poll players on their favorites.
+- Ask those with an affinity for a particular archetype what rules text templates they think exemplifies the archetype.
+- Develop scripts for each and every archetype
