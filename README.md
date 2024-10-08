@@ -267,7 +267,7 @@ def analyze_card_for_archetype(card, archetype):
     return min(max(weight, 1), 10)
 
 # Bulk processing example
-  #def process_all_cards():
+  ()def process_all_cards():
       archetypes = Archetype.objects.all()
       
       # Process in chunks to manage memory
@@ -284,7 +284,7 @@ def analyze_card_for_archetype(card, archetype):
                   card.save()
 
 # Query example for cube generation
-  #def find_cards_for_archetype(archetype_id, min_weight=7):
+  ()def find_cards_for_archetype(archetype_id, min_weight=7):
       return Card.objects.filter(
           archetype_weights__has_key=str(archetype_id)
       ).filter(
