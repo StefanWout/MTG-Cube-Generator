@@ -173,7 +173,7 @@ archetype_cubes = Cube.objects.filter(
 )
 ```
 
-````mermaid`
+```mermaid
 erDiagram
     Card {
         string scryfall_id
