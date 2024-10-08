@@ -229,7 +229,8 @@ Database objectives:
 - Develop Scryfall API call that cleans and filters irrelevant data ✔
 - Render data in my model ✔ 
 - Run test queries ✔
-- Determine if a color identity table is necessary for full functionality
+- Determine if a color identity table is necessary for full functionality ✔
+- Add color identity table and alter card table to include archetype:weighting key:value pairs ✔
 - Test Query Set for simple archetypes
 
 Archetype Queries with EDHREC unofficial API:
