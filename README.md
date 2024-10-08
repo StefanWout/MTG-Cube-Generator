@@ -286,7 +286,7 @@ def analyze_card_for_archetype(card, archetype):
   ```
 # Query example for cube generation
   ```python
-  ()def find_cards_for_archetype(archetype_id, min_weight=7):
+  def find_cards_for_archetype(archetype_id, min_weight=7):
       return Card.objects.filter(
           archetype_weights__has_key=str(archetype_id)
       ).filter(
