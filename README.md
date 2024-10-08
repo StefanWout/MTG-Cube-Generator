@@ -267,26 +267,26 @@ def analyze_card_for_archetype(card, archetype):
     return min(max(weight, 1), 10)
 
 # Bulk processing example
-def process_all_cards():
-    archetypes = Archetype.objects.all()
-    
-    # Process in chunks to manage memory
-    for cards in Card.objects.iterator(chunk_size=1000):
-        for card in cards:
-            weights = {}
-            for archetype in archetypes:
-                weight = analyze_card_for_archetype(card, archetype)
-                if weight >= 3:  # Only store significant weights
-                    weights[str(archetype.id)] = weight
-            
-            if weights:  # Only update if card has any archetype matches
-                card.archetype_weights = weights
-                card.save()
+  #def process_all_cards():
+      archetypes = Archetype.objects.all()
+      
+      # Process in chunks to manage memory
+      for cards in Card.objects.iterator(chunk_size=1000):
+          for card in cards:
+              weights = {}
+              for archetype in archetypes:
+                  weight = analyze_card_for_archetype(card, archetype)
+                  if weight >= 3:  # Only store significant weights
+                      weights[str(archetype.id)] = weight
+              
+              if weights:  # Only update if card has any archetype matches
+                  card.archetype_weights = weights
+                  card.save()
 
 # Query example for cube generation
-def find_cards_for_archetype(archetype_id, min_weight=7):
-    return Card.objects.filter(
-        archetype_weights__has_key=str(archetype_id)
-    ).filter(
-        archetype_weights__contains={str(archetype_id): min_weight}
-    ).order_by('edhrec_rank')
+  #def find_cards_for_archetype(archetype_id, min_weight=7):
+      return Card.objects.filter(
+          archetype_weights__has_key=str(archetype_id)
+      ).filter(
+          archetype_weights__contains={str(archetype_id): min_weight}
+      ).order_by('edhrec_rank')
