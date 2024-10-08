@@ -243,10 +243,48 @@ Archetype Queries with EDHREC unofficial API:
 OR
 
 Crowdsourced Archetype definitions:
-
-- Gather archetypes from EDHREC and poll players on their favorites.
+ 
 - Ask those with an affinity for a particular archetype what rules text templates they think exemplifies the archetype.
 - Develop scripts for each and every archetype
+
+# Personal Top 30 Archetypes
+- Aristocrat
+- Spellslinger
+  - Spell Copy
+  - Cantrip
+  - Storm
+- +1/+1
+- Tokens
+- Artifact
+  - Treasure
+  - Clue
+- Enchantment
+- Landfall
+  - Lands
+- Toughness
+- Blink
+- Clone
+- Chaos
+- Stompy
+- Theft
+- Lifegain
+- Voltron
+- Reanimator
+- Extra Combat
+- Forced Combat
+- Infect
+- Legends
+- Planeswalker
+- Politics
+  - Monarch
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
 
 
 ### EXAMPLE BULK DATA ARCHETYPE SCRIPT
