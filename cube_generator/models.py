@@ -22,38 +22,38 @@ class Card(models.Model):
         ('C', 'Colorless'),
 
         # Two-Color Combinations
-        ('WU', 'White-Blue'),
-        ('WB', 'White-Black'),
-        ('WR', 'White-Red'),
-        ('WG', 'White-Green'),
-        ('UB', 'Blue-Black'),
-        ('UR', 'Blue-Red'),
-        ('UG', 'Blue-Green'),
+        ('UW', 'White-Blue'),
+        ('BW', 'White-Black'),
+        ('RW', 'White-Red'),
+        ('GW', 'White-Green'),
+        ('BU', 'Blue-Black'),
+        ('RU', 'Blue-Red'),
+        ('GU', 'Blue-Green'),
         ('BR', 'Black-Red'),
         ('BG', 'Black-Green'),
-        ('RG', 'Red-Green'),
+        ('GR', 'Red-Green'),
 
         # Three-Color Combinations
-        ('WUB', 'White-Blue-Black'),
-        ('WUR', 'White-Blue-Red'),
-        ('WUG', 'White-Blue-Green'),
-        ('WBR', 'White-Black-Red'),
-        ('WBG', 'White-Black-Green'),
-        ('WRG', 'White-Red-Green'),
-        ('UBR', 'Blue-Black-Red'),
-        ('UBG', 'Blue-Black-Green'),
-        ('URG', 'Blue-Red-Green'),
-        ('BRG', 'Black-Red-Green'),
+        ('BUW', 'White-Blue-Black'),
+        ('RUW', 'White-Blue-Red'),
+        ('GUW', 'White-Blue-Green'),
+        ('BRW', 'White-Black-Red'),
+        ('BGW', 'White-Black-Green'),
+        ('GRW', 'White-Red-Green'),
+        ('BRU', 'Blue-Black-Red'),
+        ('BGU', 'Blue-Black-Green'),
+        ('GRU', 'Blue-Red-Green'),
+        ('BGR', 'Black-Red-Green'),
 
         # Four-Color Combinations
-        ('WUBR', 'White-Blue-Black-Red'),
-        ('WUBG', 'White-Blue-Black-Green'),
-        ('WURG', 'White-Blue-Red-Green'),
-        ('WBRG', 'White-Black-Red-Green'),
-        ('UBRG', 'Blue-Black-Red-Green'),
+        ('BRUW', 'White-Blue-Black-Red'),
+        ('BGUW', 'White-Blue-Black-Green'),
+        ('GRUW', 'White-Blue-Red-Green'),
+        ('BGRW', 'White-Black-Red-Green'),
+        ('BGRU', 'Blue-Black-Red-Green'),
 
         # Five-Color Combination
-        ('WUBRG', 'White-Blue-Black-Red-Green')
+        ('BGRUW', 'White-Blue-Black-Red-Green')
     ]
     scryfall_id = models.CharField(max_length=255)
     name = models.CharField(max_length=255)
